@@ -1,0 +1,36 @@
+/**
+ * Address book message
+ *
+ * An address book is a collection of person object.
+ * 
+ */
+syntax = "proto3";
+package AddressBookMessage;
+option csharp_namespace = "Wow.Ecf.Messages";
+
+message Person {
+	string name = 1; // Name of the person
+	int32 id = 2; // Unique ID number for this person.
+	string email = 3; // email address of the person
+	
+	//PhoneType is a enum, which contains valid values for a given phone number
+	enum PhoneType {
+	    NONE = 0;  // By default, if none is selected if no type is provided
+		MOBILE = 1; // Mobile number
+		HOME = 2; // Home/Landline number
+		WORK = 3; // Work phone number
+	}
+	/** PhoneNumber object contains, a valid phone number and it associated type */
+	message PhoneNumber {
+		string number = 1;
+		PhoneType type = 2;
+	}
+	//Phones is a collection of all phonnumbers of person
+	repeated PhoneNumber phones = 4;
+
+}
+
+// Address book is a collection of several persons
+message AddressBook {
+	repeated Person people = 1;
+}
